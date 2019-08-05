@@ -44,7 +44,7 @@ Please, make sure to setup your code editor so that you get instant feedback and
 3. Go to `> Preferences: Open Settings (JSON)`
 4. Append the following configuration:
 
-	```json
+	```jsonc
 	{
 	  "files.autoSave": "onFocusChange", // not required, although highly recommended
 	  "eslint.autoFixOnSave": true,
