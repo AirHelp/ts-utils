@@ -1,1 +1,1 @@
-export { tsUtilsLint } from './tsUtilsLint'
+export { tsUtilsLint } from './ts-utils-lint'

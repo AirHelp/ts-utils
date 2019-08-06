@@ -1,7 +1,7 @@
 {
   "author": "AirHelp",
   "bin": {
-    "ts-utils-lint": "bin/tsUtilsLint"
+    "ts-utils-lint": "bin/ts-utils-lint"
   },
   "dependencies": {
     "@types/eslint": "~4.16.6",

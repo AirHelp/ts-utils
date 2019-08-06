@@ -8,7 +8,7 @@ const setup = () => {
   const lint = () =>
     tsUtilsLint({
       allowInlineConfig: false,
-      filesToLint: path.resolve(__dirname, 'testApp/src/**/*.ts'),
+      filesToLint: path.resolve(__dirname, 'test-app/src/**/*.ts'),
       outputFixes: false
     })
 
