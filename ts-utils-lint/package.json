@@ -1,0 +1,45 @@
+{
+  "author": "AirHelp",
+  "bin": {
+    "ts-utils-lint": "bin/ts-utils-lint"
+  },
+  "dependencies": {
+    "@types/eslint": "~4.16.6",
+    "@types/node": "^12.6.2",
+    "@typescript-eslint/eslint-plugin": "~1.11.0",
+    "@typescript-eslint/parser": "~1.11.0",
+    "eslint": "~6.0.1",
+    "eslint-config-airbnb": "~17.1.1",
+    "eslint-config-prettier": "~6.0.0",
+    "eslint-config-react": "~1.1.7",
+    "eslint-plugin-import": "~2.18.0",
+    "eslint-plugin-jsx-a11y": "~6.2.3",
+    "eslint-plugin-prettier": "~3.1.0",
+    "eslint-plugin-react": "~7.14.2",
+    "eslint-plugin-react-hooks": "~1.6.1",
+    "prettier": "^1.18.2"
+  },
+  "description": "A single command to lint TypeScript files of your app.",
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "jest": "^24.8.0",
+    "ts-jest": "^24.0.2",
+    "typescript": "~3.5.2"
+  },
+  "files": [
+    "bin/",
+    "dist/"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@airhelp/ts-utils-lint",
+  "repository": "https://github.com/AirHelp/ts-utils",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "clean-dist": "rimraf dist",
+    "lint": "eslint --fix 'src/**/*.{ts,tsx,json}'",
+    "prebuild": "yarn run clean-dist"
+  },
+  "version": "0.1.0"
+}
