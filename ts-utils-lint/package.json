@@ -41,5 +41,5 @@
     "lint": "eslint --fix 'src/**/*.{ts,tsx,json}'",
     "prebuild": "yarn run clean-dist"
   },
-  "version": "0.0.2"
+  "version": "0.1.0"
 }
