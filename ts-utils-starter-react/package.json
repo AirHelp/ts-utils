@@ -37,8 +37,8 @@
   },
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
-  "name": "ts-utils-starter-app",
-  "repository": "https://github.com/AirHelp/ts-utils/ts-utils-starter-app",
+  "name": "ts-utils-starter-react",
+  "repository": "https://github.com/AirHelp/ts-utils/ts-utils-starter-react",
   "scripts": {
     "build": "webpack --config ./config/webpack.production.js --env.production",
     "build:development": "webpack --config ./config/webpack.dev.js --env.dev",
