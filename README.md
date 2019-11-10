@@ -1,6 +1,42 @@
 # ts-utils
 Common utilities for TypeScript language.
 
+### Table of Contents
+
+- [Guides](#guides)
+  - [Environment-specific variables](#environment-specific-variables)
+  - [Managing application state in React](#managing-application-state-in-react)
+
+### Guides
+## Environment-specific variables
+
+The widest spread approach for injecting environment-specific variables to Single Page Applications which aren't served from the same domain as their web server is via .env files. It may sound as it's very similar to how it works for backend services, there is however a significant difference.
+
+Let's say we work on _Kudos.ly_ app written in Golang and we release a new funcionality. One of the steps in a deploy pipeline is building a docker image tagged with the git commit we're releasing. So, something like `kudosly:bsdfg734bfjkdsf`. Injecting ENV variables happens when we start the application:
+
+```bash
+docker run --env-file=./env kudosly:bsdfg734bfjkdsf
+```
+
+Now, no matter if we run this app on one of tests environments or on production we are 100% sure that it's always the same code. Only configuration is subject to change.
+
+In case of client-side applications, the content of .env file is loaded to `process.env` object during compilation time (via a build tool like Webpack). So, for each environment the build process has to be repeated. Or, in other words, you deploy different code to production than you've tested.
+
+One way to overcome it that was tested at AirHelp is to configure web server to return an appropriate .env file for a given environment always under the same path (/env):
+
+```
+kudos-test.ly/env -> some.storage/kudosly/env-test.json
+kudos.ly/env -> some.storage/kudosly/env-production.json
+```
+
+However, this approach comes with a major disadvantage. Namely, your application has to wait for the /env request to finish before it can render. It's fine for internal services, but such delays in rendering customer-facing apps are bad practice.
+
+To conclude, injecting ENV variables on compile time is _good enough_. However, we should invest some more time to dig into this area. If we figure out a fisible way of serving configuration and keeping build artifacts immutable without making additional HTTP calls on start up, we would also benefit from speed ups in a deploy pipeline and removing part of the load on automation servers.
+
+#### Resources
+
+- https://www.freecodecamp.org/news/environment-settings-in-javascript-apps-c5f9744282b6/
+
 ## Managing application state in React
 
 React.js is not opinionated when it comes to so called _global_ application state. There are hundreds of articles and videos online advocating for or criticising libraries which try to tackle the problem. The goal of this section is to wrap up what we have learnt about managing state in React applications so far. We start with the most basic example and gradually add some complexity to expose weak spots of implementation at given step.
@@ -186,7 +222,7 @@ const App = () => (
 
 Now, everytime user give herself kudos and we increment this number in a state object, all components which consume `StateProvider` would be updated. Even the ones which display the gallery and only need to read the collection under the `photos` key. It's not a problem when user has one picture uploaded just like in the example above. But what if someone uploaded 126 selfies? The performance may suffer. At least, fixing it will be easy once you realize nothing stops you from having multiple state providers. Not everything has to be global.
 
-### Resources
+#### Resources
 
 - https://reactjs.org/docs/thinking-in-react.html
 - https://reactjs.org/docs/lifting-state-up.html
