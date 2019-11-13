@@ -34,8 +34,8 @@ test('lints respecting .eslintrc.json and .prettierrc.json', () => {
 
   expect(results[0].messages).toStrictEqual([
     {
-      column: 5,
-      endColumn: 61,
+      column: 7,
+      endColumn: 63,
       endLine: 2,
       line: 2,
       message:
@@ -46,8 +46,8 @@ test('lints respecting .eslintrc.json and .prettierrc.json', () => {
       severity: 2
     },
     {
-      column: 5,
-      endColumn: 61,
+      column: 7,
+      endColumn: 63,
       endLine: 2,
       line: 2,
       message:
@@ -57,8 +57,8 @@ test('lints respecting .eslintrc.json and .prettierrc.json', () => {
       severity: 1
     },
     {
-      column: 58,
-      endColumn: 61,
+      column: 60,
+      endColumn: 63,
       endLine: 2,
       line: 2,
       message: 'Unexpected any. Specify a different type.',
