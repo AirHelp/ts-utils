@@ -30,8 +30,8 @@
 
 **ts-utils-lint** is meant to always be _a single command to lint TypeScript files respecting .eslintrc and .prettierrc files of your application_. It means that in terms of features not much is going to change. What we would like to improve in the upcoming releases though, is its configurability. For instance:
 
-- custom pattern for files to be linted,
-- a `--ci` flag to skip automatic fixes and return with a non-zero code in case of errors
+* [x] a `--ci` flag to skip automatic fixes and return with a non-zero code in case of errors [#3](https://github.com/AirHelp/ts-utils/pull/3)
+* [ ] custom pattern for files to be linted
 
 ## Code editors integration
 
