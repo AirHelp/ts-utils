@@ -1,4 +1,4 @@
-import { tsUtilsLint } from '../index'
+import { tsUtilsLint } from '../ts-utils-lint'
 import path from 'path'
 
 const setup = () => {
@@ -9,7 +9,7 @@ const setup = () => {
     tsUtilsLint({
       allowInlineConfig: false,
       filesToLint: path.resolve(__dirname, 'test-app/src/**/*.ts'),
-      outputFixes: false
+      writeFixes: false
     })
 
   return {
@@ -34,8 +34,8 @@ test('lints respecting .eslintrc.json and .prettierrc.json', () => {
 
   expect(results[0].messages).toStrictEqual([
     {
-      column: 5,
-      endColumn: 61,
+      column: 7,
+      endColumn: 58,
       endLine: 2,
       line: 2,
       message:
@@ -46,8 +46,8 @@ test('lints respecting .eslintrc.json and .prettierrc.json', () => {
       severity: 2
     },
     {
-      column: 5,
-      endColumn: 61,
+      column: 7,
+      endColumn: 58,
       endLine: 2,
       line: 2,
       message:
@@ -57,14 +57,19 @@ test('lints respecting .eslintrc.json and .prettierrc.json', () => {
       severity: 1
     },
     {
-      column: 58,
-      endColumn: 61,
+      column: 62,
+      endColumn: 144,
       endLine: 2,
+      fix: {
+        range: [89, 171],
+        text:
+          "\n  'string in double quotes, wut?',\n  'the line length limit is gonna be sooo exceeded'\n"
+      },
       line: 2,
-      message: 'Unexpected any. Specify a different type.',
-      messageId: 'unexpectedAny',
-      nodeType: 'TSAnyKeyword',
-      ruleId: '@typescript-eslint/no-explicit-any',
+      message:
+        'Replace `"string·in·double·quotes,·wut?",·"the·line·length·limit·is·gonna·be·sooo·exceeded"` with `⏎··\'string·in·double·quotes,·wut?\',⏎··\'the·line·length·limit·is·gonna·be·sooo·exceeded\'⏎`',
+      nodeType: null,
+      ruleId: 'prettier/prettier',
       severity: 2
     }
   ])

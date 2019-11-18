@@ -6,26 +6,34 @@ const defaultFilesToLint = `${srcPath}/**/*.{ts,tsx,json}`
 
 /**
  * @param filesToLint - Path to a file or directory of files to lint (supports wildcards)
- * @param outputFixes - Shall the fixes be output to disk?
+ * @param writeFixes - Shall the fixes be output to disk?
  * @param allowInlineConfig - Disables "magic" comments like `eslint-disable`
  */
 export const tsUtilsLint = ({
   filesToLint = defaultFilesToLint,
-  outputFixes = true,
+  writeFixes = true,
   allowInlineConfig = true
-}) => {
+} = {}) => {
   /**
-   * in order to resolve plugins correctly,
+   * In order to resolve plugins correctly,
    * `ts-utils-lint` is explicitly set as a current working directory.
    */
   const cwd = path.resolve(__dirname, '..')
 
   const { CLIEngine } = ESLint
 
+  /**
+   * According to ESLint documentation:
+   * > Files on disk are never changed regardless of the value of fix.
+   * > To persist changes to disk, call outputFixes().
+   * Apparently, it's not the case when Prettier is integrated with ESLint as a plugin.
+   * It decides whether to output fixes or not based on `fix` parameter passed to CLIEngine
+   * while ignoring `outputFixes`.
+   */
   const cli = new CLIEngine({
     allowInlineConfig,
     cwd,
-    fix: true
+    fix: writeFixes
   })
 
   const report = cli.executeOnFiles([filesToLint])
@@ -33,7 +41,7 @@ export const tsUtilsLint = ({
 
   console.log(formatter(report.results))
 
-  outputFixes && CLIEngine.outputFixes(report)
+  writeFixes && CLIEngine.outputFixes(report)
 
   /**
    * The purpose of returning results is to make unit testing easier.
