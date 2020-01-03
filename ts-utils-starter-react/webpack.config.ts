@@ -1,13 +1,15 @@
+import Dotenv from 'dotenv-webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { resolve } from 'path'
 import * as webpack from 'webpack'
 
-const { NODE_ENV } = process.env
-const DEV = 'development'
-const PROD = 'production'
+const DEV = 'development' as const
+const PROD = 'production' as const
 
-const isDevelopment = NODE_ENV === 'development'
-const isProduction = NODE_ENV === 'production'
+const NODE_ENV = process.env.NODE_ENV === 'production' ? PROD : DEV
+
+const isDevelopment = NODE_ENV === DEV
+const isProduction = NODE_ENV === PROD
 
 if (!NODE_ENV || ![DEV, PROD].includes(NODE_ENV)) {
   throw `Unsupported environment: ${NODE_ENV}`
@@ -16,7 +18,7 @@ if (!NODE_ENV || ![DEV, PROD].includes(NODE_ENV)) {
 const config = {
   context: resolve(__dirname, 'src'),
 
-  ...(isDevelopment && { devtool: 'cheap-eval-source-map' }),
+  ...(isDevelopment && { devtool: 'cheap-eval-source-map' as const }),
 
   entry: isProduction
     ? './index.tsx'
@@ -42,6 +44,7 @@ const config = {
   },
 
   plugins: [
+    new Dotenv(),
     new HtmlWebpackPlugin({
       template: resolve(__dirname, 'src', 'index.html')
     }),

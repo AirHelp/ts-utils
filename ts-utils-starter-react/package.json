@@ -1,7 +1,6 @@
 {
   "author": "ZULU Team",
   "dependencies": {
-    "@airhelp/runtime-env": "2.0.0",
     "@types/axios": "~0.14.0",
     "@types/react": "~16.9.5",
     "@types/react-dom": "~16.9.1",
@@ -14,6 +13,8 @@
   "devDependencies": {
     "@airhelp/ts-utils-lint": "~0.1.0",
     "@hot-loader/react-dom": "^16.9.0",
+    "@testing-library/react": "~9.4.0",
+    "@types/dotenv-webpack": "~1.7.0",
     "@types/express": "~4.17.1",
     "@types/html-webpack-plugin": "~3.2.1",
     "@types/jest": "~24.0.15",
@@ -21,6 +22,7 @@
     "@types/webpack": "~4.39.2",
     "@types/webpack-dev-middleware": "~2.0.3",
     "@types/webpack-hot-middleware": "~2.16.5",
+    "dotenv-webpack":"~1.7.0",
     "esm": "^3.2.25",
     "express": "^4.14.1",
     "html-webpack-plugin": "~3.2.0",
